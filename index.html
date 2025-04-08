@@ -83,12 +83,13 @@
 
     <h2>👤 About</h2>
     <p>Name: Qianye Wu</p>
-    <p>Email: <a href="mailto:you@example.com">you@example.com</a></p>
-    <p>LinkedIn: <a href="https://linkedin.com/in/yourname" target="_blank">linkedin.com/in/yourname</a></p>
+    <p>Email: wuqianye407@gmail.com</a></p>
+    <p>LinkedIn: <a href="https://www.linkedin.com/in/qianye-angelina-wu/" target="_blank">linkedin.com/in/qianye-angelina-wu</a></p>
   </div>
 
   <footer>
-    <p>👁️ Total site views: <span id="busuanzi_value_site_pv">Loading...</span></p>
+    <p>👁️ Homepage views: <span id="busuanzi_value_page_pv">Loading...</span></p>
+    <p>📊 Total site views: <span id="busuanzi_value_site_pv">Loading...</span></p>
     <p>&copy; 2025 Qianye Wu. All rights reserved.</p>
   </footer>
 
@@ -103,44 +104,23 @@
         const blogContainer = document.getElementById("blog-container");
         blogContainer.innerHTML = "";
 
-        const storedViews = JSON.parse(localStorage.getItem("blogViews")) || {};
-
         blogPosts.forEach(post => {
-          const daysSincePublished = Math.floor(
-            (new Date() - new Date(post.date)) / (1000 * 60 * 60 * 24)
-          );
-          const estimatedViews = Math.floor(1100 * Math.log(daysSincePublished + 1) - 500);
-          const views = storedViews[post.id] || estimatedViews;
-
           const postElement = document.createElement("div");
           postElement.classList.add("blog-card");
           postElement.innerHTML = `
             <h3>${post.title}</h3>
             <p class="blog-meta">
               <strong>By:</strong> ${post.author} &nbsp; | &nbsp;
-              <strong>Date:</strong> ${post.date} &nbsp; | &nbsp;
-              <strong>Views:</strong> <span id="views-${post.id}">${views}</span>
+              <strong>Date:</strong> ${post.date}
             </p>
             <p>${post.excerpt}</p>
-            <a href="${post.file}" class="button blog-read-button" onclick="incrementViews(${post.id})">Read More</a>
+            <a href="${post.file}" class="button blog-read-button">Read More</a>
           `;
           blogContainer.appendChild(postElement);
         });
       } catch (err) {
         console.error("Error loading blog posts:", err);
       }
-    }
-
-    function incrementViews(postId) {
-      const views = JSON.parse(localStorage.getItem("blogViews")) || {};
-      if (!(postId in views)) {
-        const post = blogPosts.find(p => p.id === postId);
-        const daysSincePublished = Math.floor((new Date() - new Date(post.date)) / (1000 * 60 * 60 * 24));
-        views[postId] = Math.floor(1100 * Math.log(daysSincePublished + 1) - 500);
-      }
-      views[postId] += 1;
-      localStorage.setItem("blogViews", JSON.stringify(views));
-      document.getElementById(`views-${postId}`).textContent = views[postId];
     }
 
     document.addEventListener("DOMContentLoaded", loadBlogPosts);
