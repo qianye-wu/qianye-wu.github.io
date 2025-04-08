@@ -6,5 +6,13 @@
     "date": "2024-01-15",
     "excerpt": "Explore privacy principles, technologies, and legal frameworks that small businesses need to understand when adopting AI.",
     "file": "blog/data-privacy-ai-small-businesses.html"
+  },
+  {
+    "id": 2,
+    "title": "Navigating AI Compliance: A Guide for Small Businesses in 2025",
+    "author": "Qianye Wu",
+    "date": "2024-06-08",
+    "excerpt": "A complete guide to the latest AI regulations, compliance risks, and practical strategies for small businesses.",
+    "file": "blogs/ai-compliance.html"
   }
 ]
