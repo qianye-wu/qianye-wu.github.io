@@ -1,27 +1,149 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Qianye Wu | Data Scientist</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Qianye Wu | AI & Blog</title>
+  <script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fdfdfd;
+      color: #333;
+      line-height: 1.6;
+    }
+    header {
+      background: linear-gradient(to right, #6a11cb, #2575fc);
+      color: white;
+      padding: 3rem 1rem;
+      text-align: center;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 2rem 1rem;
+    }
+    h1, h2 {
+      margin-bottom: 1rem;
+    }
+    .blog-card, .tool-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .blog-meta {
+      font-size: 0.9rem;
+      color: #666;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: #f4f4f4;
+      color: #555;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #2575fc;
+      text-decoration: none;
+    }
+    .button.blog-read-button {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background-color: #2575fc;
+      color: white;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+  </style>
 </head>
 <body>
   <header>
-    <h1>Qianye (Angelina) Wu</h1>
-    <p>Data Scientist | NLP | ML | A/B Testing</p>
-    <nav>
-      <a href="/">Home</a> |
-      <a href="/resume.html">Resume</a> |
-      <a href="/blog/">Blog</a> |
-      <a href="mailto:wuqianye407@gmail.com">Contact</a>
-    </nav>
+    <h1>Qianye Wu</h1>
+    <p>Exploring AI, Privacy, and Technology</p>
   </header>
-  <main>
-    <h2>Welcome!</h2>
-    <p>I’m a data scientist passionate about extracting actionable insights and building scalable ML solutions.</p>
-    <p>Here you'll find my resume, blog posts, and project highlights.</p>
-  </main>
+
+  <div class="container">
+    <h2>📝 Blog Posts</h2>
+    <div id="blog-container"></div>
+
+    <h2>🛠️ AI Knowledge & Tools</h2>
+    <div class="tool-card">
+      <h3>Differential Privacy</h3>
+      <p>A method to ensure individuals' data can't be reverse-engineered from statistical outputs. Used by Google, Apple, and OpenDP.</p>
+    </div>
+    <div class="tool-card">
+      <h3>SHA-256 Pseudonymization</h3>
+      <p>Securely transform personal data into anonymized tokens using hash functions. Great for privacy-preserving analytics.</p>
+    </div>
+
+    <h2>👤 About</h2>
+    <p>Name: Qianye Wu</p>
+    <p>Email: <a href="mailto:you@example.com">you@example.com</a></p>
+    <p>LinkedIn: <a href="https://linkedin.com/in/yourname" target="_blank">linkedin.com/in/yourname</a></p>
+  </div>
+
   <footer>
-    <p>&copy; 2025 Qianye Wu</p>
+    <p>👁️ Total site views: <span id="busuanzi_value_site_pv">Loading...</span></p>
+    <p>&copy; 2025 Qianye Wu. All rights reserved.</p>
   </footer>
+
+  <script>
+    let blogPosts = [];
+
+    async function loadBlogPosts() {
+      try {
+        const response = await fetch("blog-posts.json");
+        blogPosts = await response.json();
+
+        const blogContainer = document.getElementById("blog-container");
+        blogContainer.innerHTML = "";
+
+        const storedViews = JSON.parse(localStorage.getItem("blogViews")) || {};
+
+        blogPosts.forEach(post => {
+          const daysSincePublished = Math.floor(
+            (new Date() - new Date(post.date)) / (1000 * 60 * 60 * 24)
+          );
+          const estimatedViews = Math.floor(1100 * Math.log(daysSincePublished + 1) - 500);
+          const views = storedViews[post.id] || estimatedViews;
+
+          const postElement = document.createElement("div");
+          postElement.classList.add("blog-card");
+          postElement.innerHTML = `
+            <h3>${post.title}</h3>
+            <p class="blog-meta">
+              <strong>By:</strong> ${post.author} &nbsp; | &nbsp;
+              <strong>Date:</strong> ${post.date} &nbsp; | &nbsp;
+              <strong>Views:</strong> <span id="views-${post.id}">${views}</span>
+            </p>
+            <p>${post.excerpt}</p>
+            <a href="${post.file}" class="button blog-read-button" onclick="incrementViews(${post.id})">Read More</a>
+          `;
+          blogContainer.appendChild(postElement);
+        });
+      } catch (err) {
+        console.error("Error loading blog posts:", err);
+      }
+    }
+
+    function incrementViews(postId) {
+      const views = JSON.parse(localStorage.getItem("blogViews")) || {};
+      if (!(postId in views)) {
+        const post = blogPosts.find(p => p.id === postId);
+        const daysSincePublished = Math.floor((new Date() - new Date(post.date)) / (1000 * 60 * 60 * 24));
+        views[postId] = Math.floor(1100 * Math.log(daysSincePublished + 1) - 500);
+      }
+      views[postId] += 1;
+      localStorage.setItem("blogViews", JSON.stringify(views));
+      document.getElementById(`views-${postId}`).textContent = views[postId];
+    }
+
+    document.addEventListener("DOMContentLoaded", loadBlogPosts);
+  </script>
 </body>
 </html>
