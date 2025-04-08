@@ -6,27 +6,19 @@
   <title>Data Privacy in the Age of AI</title>
   <link rel="stylesheet" href="../assets/style.css" />
   <script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script>
-  
 </head>
 <body>
   <header>
-    <h1>Qianye Wu's Blog</h1>
-    <nav>
-      <a href="/">Home</a> |
-      <a href="/blog/">Blog</a>
-    </nav>
+    <h1>Data Privacy in the Age of AI</h1>
+    <p class="blog-meta">🗓️ January 15, 2024 &nbsp;&nbsp; ✍️ Qianye Wu</p>
+    <p class="blog-meta">👁️ Views: <span id="busuanzi_value_page_pv">Loading...</span></p>
   </header>
 
-  <main>
-    <h2>Data Privacy in the Age of AI: What Small Businesses Need to Know</h2>
-    <p>🗓️ <strong>Date:</strong> January 15, 2024 &nbsp;&nbsp;&nbsp; ✍️ <strong>Author:</strong> Qianye Wu</p>
-    <p class="meta">👁️ This post views: <span id="busuanzi_value_page_pv">Loading...</span></p>
-    
+  <div class="container">
     <p>As artificial intelligence becomes more deeply integrated into small business operations, data privacy has emerged as both a legal obligation and a strategic differentiator. While AI can drive insights and automation, it also introduces risks when it comes to collecting, processing, and storing personal data. In this article, we’ll explore the key privacy principles, technologies, and frameworks that small businesses need to understand in 2025.</p>
 
-    <h3>Understanding Privacy Risks in AI Systems</h3>
+    <h2>Understanding Privacy Risks in AI Systems</h2>
     <p>AI models thrive on data — but that data often includes personally identifiable information (PII) such as names, email addresses, browsing behavior, and even biometric data. Improper handling can lead to compliance violations, reputational harm, or unintended bias amplification.</p>
-
     <p>Some common risk scenarios include:</p>
     <ul>
       <li>Using unconsented customer data for training recommendation engines</li>
@@ -34,21 +26,22 @@
       <li>Inadvertently leaking user details through AI-generated summaries or suggestions</li>
     </ul>
 
-    <h3>Core Technical Safeguards for Privacy</h3>
+    <h2>Core Technical Safeguards for Privacy</h2>
     <p>There are several technologies and best practices that help preserve user privacy in AI workflows:</p>
 
-    <h4>1. Data Anonymization and Pseudonymization</h4>
+    <h3>1. Data Anonymization and Pseudonymization</h3>
     <p>Anonymization removes identifying information from data. In contrast, pseudonymization replaces identifiers with aliases (like hashed IDs) that can be reversed only with secure keys.</p>
+    <p><strong>Example using SHA-256 hashing in JavaScript:</strong></p>
     <pre><code>const crypto = require('crypto');
 const pseudonymize = (input) => crypto.createHash('sha256').update(input).digest('hex');</code></pre>
 
-    <h4>2. Differential Privacy</h4>
+    <h3>2. Differential Privacy</h3>
     <p>This approach introduces statistical noise into query responses, so individuals cannot be identified even when aggregate data is analyzed. Tools like Google DP or OpenDP allow you to configure privacy budgets and epsilon parameters.</p>
 
-    <h4>3. Encryption (At Rest and In Transit)</h4>
+    <h3>3. Encryption (At Rest and In Transit)</h3>
     <p>All AI pipelines should encrypt sensitive data using protocols like TLS 1.3 for transmission and AES-256 for storage. Cloud platforms (e.g., AWS KMS or GCP Key Management) offer automated encryption tools.</p>
 
-    <h3>Consent and Transparency</h3>
+    <h2>Consent and Transparency</h2>
     <p>Users must be informed about how their data will be used, especially in AI contexts. Ensure your systems:</p>
     <ul>
       <li>Provide clear consent checkboxes for data collection</li>
@@ -57,16 +50,16 @@ const pseudonymize = (input) => crypto.createHash('sha256').update(input).digest
     </ul>
     <p>Modern consent management platforms (CMPs) like Osano or Cookiebot can integrate with your website or app to handle this.</p>
 
-    <h3>Compliance Frameworks: GDPR, CCPA, and Beyond</h3>
+    <h2>Compliance Frameworks: GDPR, CCPA, and Beyond</h2>
     <p>Small businesses that operate in or serve customers in regulated regions must comply with laws like:</p>
     <ul>
-      <li><strong>GDPR</strong> – General Data Protection Regulation (EU)</li>
-      <li><strong>CCPA</strong> – California Consumer Privacy Act (US)</li>
-      <li><strong>LGPD</strong> – Brazil’s data protection regulation</li>
+      <li>GDPR – General Data Protection Regulation (EU)</li>
+      <li>CCPA – California Consumer Privacy Act (US)</li>
+      <li>LGPD – Brazil’s data protection regulation</li>
     </ul>
     <p>Key requirements include data minimization, purpose limitation, user access rights, and breach notification protocols. Make sure your vendors and third-party APIs are also compliant.</p>
 
-    <h3>Best Practices for AI Projects with Personal Data</h3>
+    <h2>Best Practices for AI Projects with Personal Data</h2>
     <ul>
       <li>Perform a Data Protection Impact Assessment (DPIA) before launching AI tools</li>
       <li>Use synthetic data or masked datasets during model training</li>
@@ -75,20 +68,22 @@ const pseudonymize = (input) => crypto.createHash('sha256').update(input).digest
       <li>Keep human-in-the-loop oversight when decisions affect user rights</li>
     </ul>
 
-    <h3>Final Thoughts</h3>
+    <h2>Final Thoughts</h2>
     <p>Data privacy is not just a checkbox—it’s a competitive advantage. Small businesses that adopt AI responsibly and transparently build greater trust and brand loyalty. By applying core privacy engineering principles, using encryption, and respecting consent, you can harness the power of AI without compromising your customers’ rights.</p>
 
-    <h4>Key Takeaways</h4>
+    <h3>Key Takeaways</h3>
     <ul>
       <li>AI models must respect user privacy from design to deployment</li>
       <li>Tech safeguards like anonymization, encryption, and differential privacy are essential</li>
       <li>Complying with GDPR, CCPA, and similar laws is not optional</li>
       <li>Transparency and consent build user trust in AI systems</li>
     </ul>
-  </main>
+
+    <p><a href="../index.html" class="button blog-read-button">← Back to Blog</a></p>
+  </div>
 
   <footer>
-    <p>&copy; 2025 Qianye Wu</p>
+    <p>&copy; 2025 Qianye Wu. All rights reserved.</p>
   </footer>
 </body>
 </html>
