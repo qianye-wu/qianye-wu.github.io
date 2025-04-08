@@ -90,3 +90,21 @@ code {
   font-size: 0.95rem;
   color: #2d2d2d;
 }
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.tool-card {
+  padding: 1.25rem;
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.tool-card:hover {
+  transform: translateY(-2px);
+}
