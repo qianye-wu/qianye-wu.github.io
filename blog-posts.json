@@ -14,5 +14,13 @@
     "date": "2024-06-08",
     "excerpt": "A complete guide to the latest AI regulations, compliance risks, and practical strategies for small businesses.",
     "file": "blog/ai-compliance.html"
+  },
+  {
+    "id": 3,
+    "title": "Implementing AI Ethics in Small Business Operations",
+    "author": "Qianye Wu",
+    "date": "2025-01-08",
+    "excerpt": "A deep dive into ethical AI design, fairness, transparency, and practical steps for responsible use in SMBs.",
+    "file": "blog/ai-ethics.html"
   }
 ]
