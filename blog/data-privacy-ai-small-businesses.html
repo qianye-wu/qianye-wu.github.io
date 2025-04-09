@@ -65,17 +65,88 @@ const pseudonymize = (input) => crypto.createHash('sha256').update(input).digest
 
     <p>Failure to comply with any of these frameworks can result in heavy fines and public backlash. Building compliant AI pipelines from the start helps future-proof your business.</p>
     <h2>Case Study: A Small Business Building Privacy-First AI</h2>
-    <p>Consider a small D2C skincare brand using AI to personalize customer product recommendations. They collect input like skin type, ingredient sensitivities, and past purchase history. Here’s how they built a privacy-conscious AI workflow:</p>
 
+    <p>
+      Consider a small D2C (direct-to-consumer) skincare brand called <em>LuminaGlow</em>, which uses AI to recommend personalized products based on user input such as skin type, ingredient sensitivities, and purchase history. As they scaled, they prioritized building an AI pipeline that respects privacy, security, and consent.
+    </p>
+    
+    <p>Here's a breakdown of how they re-engineered their AI system:</p>
+    
     <ul>
-      <li><strong>Step 1:</strong> Replace emails and names with SHA-256 pseudonyms before analysis</li>
-      <li><strong>Step 2:</strong> Use synthetic data to test and iterate recommendation models early</li>
-      <li><strong>Step 3:</strong> Encrypt all model output logs using AES-256</li>
-      <li><strong>Step 4:</strong> Use a UI banner to request consent for using behavioral data to improve recommendations</li>
-      <li><strong>Step 5:</strong> Keep a human reviewer in the loop to validate model suggestions that could impact health or safety</li>
+      <li>
+        <strong>Step 1: Pseudonymize personal identifiers</strong><br>
+        Before storing or analyzing user data, they hashed emails and user IDs with SHA-256 to prevent re-identification.
+        <pre><code># Python pseudocode
+    import hashlib
+    
+    def pseudonymize(identifier):
+        return hashlib.sha256(identifier.encode()).hexdigest()
+    
+    hashed_email = pseudonymize("user@example.com")
+    </code></pre>
+      </li>
+    
+      <li>
+        <strong>Step 2: Use synthetic data in early experiments</strong><br>
+        Instead of training models directly on production data, they generated realistic but fake data to simulate user interactions.
+        <pre><code># Generate synthetic customer data (example pseudocode)
+    from sdv.tabular import GaussianCopula
+    
+    model = GaussianCopula()
+    model.fit(real_customer_df)
+    synthetic_df = model.sample(num_rows=5000)
+    </code></pre>
+      </li>
+    
+      <li>
+        <strong>Step 3: Encrypt model output logs</strong><br>
+        All prediction logs were encrypted at rest using AES-256, and access was restricted via cloud KMS.
+        <pre><code># Pseudocode for encrypting logs before storage
+    from cryptography.fernet import Fernet
+    
+    key = Fernet.generate_key()
+    cipher = Fernet(key)
+    
+    encrypted_log = cipher.encrypt(b"recommended_product_id=12345")
+    store_to_s3(encrypted_log)
+    </code></pre>
+      </li>
+    
+      <li>
+        <strong>Step 4: Respect user consent with opt-in controls</strong><br>
+        Users were given fine-grained controls via a UI banner to allow or block data usage for different purposes.
+        <pre><code>// Frontend banner logic (JS pseudocode)
+    if (!userHasConsented()) {
+      disableTracking();
+    } else {
+      personalizeExperience();
+    }
+    </code></pre>
+      </li>
+    
+      <li>
+        <strong>Step 5: Keep a human-in-the-loop for safety-sensitive recommendations</strong><br>
+        AI suggestions with risk tags (e.g., acids or allergens) were queued for human review.
+        <pre><code># Human-in-the-loop check (Python logic)
+    if "acid" in recommendation.keywords or user.sensitivity_score > 8:
+        queue_for_manual_review(recommendation)
+    else:
+        show_to_user(recommendation)
+    </code></pre>
+      </li>
     </ul>
-
-    <p>This business also embedded links in their emails allowing customers to view or delete their data profiles. The result? A 23% increase in customer trust scores from surveys, and fewer abandoned carts due to personalized but respectful AI.</p>
+    
+    <p>
+      Additional controls included email links for “View My Data” and “Forget Me,” allowing customers to fully control how their data was used. Internally, dashboards and training sets only worked with pseudonymized or synthetic data.
+    </p>
+    
+    <p>
+      Results after 6 months included a <strong>23% increase in trust scores</strong>, <strong>16% decrease in opt-out rates</strong>, and a <strong>12% boost in repeat purchases</strong>. Feedback suggested that even privacy-cautious users returned more often due to perceived transparency and respect.
+    </p>
+    
+    <p>
+      LuminaGlow’s approach demonstrates that privacy-first design isn’t just ethical—it’s good business. By investing in consent, security, and interpretability, they turned compliance into competitive advantage.
+    </p>
 
     <h2>Looking Forward: Privacy as a Product Principle</h2>
     <p>Privacy engineering is evolving beyond a compliance issue and becoming a core product value—like accessibility or performance. In 2025 and beyond, we’ll see:</p>
