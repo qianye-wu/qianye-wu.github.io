@@ -110,12 +110,15 @@ code {
 }
 
 .share-buttons {
-  margin-top: 1rem;
-  margin-bottom: 2rem;
-  font-size: 0.95rem;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
 }
 .share-buttons a {
   text-decoration: none;
   margin: 0 0.5rem;
+  color: #0077cc;
+}
+.share-buttons a:hover {
+  text-decoration: underline;
 }
 
